@@ -43,7 +43,7 @@ You found the correct password. Secret message is:
 vili@T490:~/projects/hy-docker/part1$ 
 ```
 
-# 1.4
+## 1.4
 
 ```
 vili@T490:~/projects/hy-docker/part1$ docker run -d devopsdockeruh/exec_bash_exercise
