@@ -102,3 +102,34 @@ Searching..
 vili@T490:~/projects/hy-docker/part1$ 
 
 ```
+
+## 1.6
+
+```
+vili@T490:~/projects/hy-docker/part1/docker-clock$ docker build -t docker-clock .
+Sending build context to Docker daemon  2.048kB
+Step 1/2 : FROM devopsdockeruh/overwrite_cmd_exercise
+ ---> 0f7f459b76c9
+Step 2/2 : CMD ["-c"]
+ ---> Running in 88a390f1e954
+Removing intermediate container 88a390f1e954
+ ---> 8f74ecf55214
+Successfully built 8f74ecf55214
+Successfully tagged docker-clock:latest
+vili@T490:~/projects/hy-docker/part1/docker-clock$ docker run docker-clock
+1
+2
+3
+4
+5
+6
+7
+```
+
+[Dockerfile](./docker-clock/Dockerfile)
+
+## 1.7
+
+```
+
+```
