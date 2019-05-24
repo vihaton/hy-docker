@@ -78,3 +78,27 @@ root@ca468df5e4f0:/usr/app#
 
 ## 1.5
 
+```
+vili@T490:~/projects/hy-docker/part1$ docker run -d --rm -it --name curler ubuntu:xenial sh -c 'echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;'
+62ecda9e1231aed8913e09f812c6ee98af07ac509b9d0f12c0ddc00642028de3
+vili@T490:~/projects/hy-docker/part1$ docker exec -it curler apt-get update
+
+...
+
+vili@T490:~/projects/hy-docker/part1$ docker exec -it curler apt-get install curl wget
+
+...
+
+vili@T490:~/projects/hy-docker/part1$ docker attach curler 
+helsinki.fi
+Searching..
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>301 Moved Permanently</title>
+</head><body>
+<h1>Moved Permanently</h1>
+<p>The document has moved <a href="http://www.helsinki.fi/">here</a>.</p>
+</body></html>
+vili@T490:~/projects/hy-docker/part1$ 
+
+```
