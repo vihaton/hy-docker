@@ -182,9 +182,145 @@ vili@T490:~/projects/hy-docker/part1/youtube-dl$ docker run -d -p 4321:80 devops
 
 ## 1.10
 
+Dockerfile
 ```
+FROM node:alpine
+
+COPY package.json package.json
+RUN npm install
+
+COPY ./ ./
+
 EXPOSE 5000
+CMD ["npm", "start"]
 ```
+
+build
+
+`vili@T490:~/projects/docker/frontend-example-docker$ docker build -t frontend-example .`
+
+run
+
+`vili@T490:~/projects/docker/frontend-example-docker$ docker run --rm --name frontend-ex -p 5000:5000 frontend-example`
+
 
 ## 1.11
 
+Dockerfile
+
+```
+FROM node:alpine
+
+COPY package.json package.json
+RUN npm install
+
+COPY ./ ./
+
+EXPOSE 8000
+CMD ["npm", "start"]
+```
+
+build
+
+`vili@T490:~/projects/docker/backend-example-docker$ docker build -t backend-example .`
+
+run 
+
+`vili@T490:~/projects/docker/backend-example-docker$ docker run --rm --name backend-ex -p 8000:8000 -v $(pwd)/logs.txt:/logs.txt backend-example`
+
+## 1.12
+
+### FRONT
+
+Dockerfile
+
+```
+FROM node:alpine
+
+COPY package.json package.json
+RUN npm install
+
+COPY ./ ./
+
+EXPOSE 5000
+ENV API_URL=http://localhost:8000
+CMD ["npm", "start"]
+```
+
+run 
+
+`vili@T490:~/projects/docker/frontend-example-docker$ docker run --rm --name frontend-ex -p 5000:5000 frontend-example`
+
+### BACK
+
+```
+FROM node:alpine
+
+COPY package.json package.json
+RUN npm install
+
+COPY ./ ./
+
+EXPOSE 8000
+ENV FRONT_URL=http://localhost:5000
+CMD ["npm", "start"]
+```
+
+run
+
+`vili@T490:~/projects/docker/backend-example-docker$ docker run --rm --name backend-ex -p 8000:8000 -v $(pwd)/logs.txt:/logs.txt backend-example`
+
+
+## 1.13
+
+Dockerfile 
+
+```
+FROM openjdk:8
+
+RUN java -version
+
+COPY ./ ./
+
+RUN ./mvnw package
+
+EXPOSE 8080
+
+CMD java -jar ./target/docker-example-1.1.3.jar
+```
+
+run
+
+`vili@T490:~/projects/docker/spring-example-project$ docker run -d --rm --name spring-ex -p 8080:8080 spring-example`
+
+## 1.14
+
+Dockerfile 
+
+```
+FROM ruby:2.6.0
+
+RUN gem install bundler
+
+COPY ./ ./
+
+RUN apt-get update && apt-get install -y --allow-unauthenticated nodejs
+
+RUN bundle install
+
+RUN rails db:migrate
+
+CMD [ "rails", "s" ]
+```
+
+build
+
+`vili@T490:~/projects/docker/rails-example-project$ docker build -t rails-example .`
+
+run 
+
+`vili@T490:~/projects/docker/rails-example-project$ docker run --rm --name rails-ex -p 3000:3000 rails-example`
+
+## 1.15
+
+[link to docker hub](https://cloud.docker.com/u/vihaton/repository/docker/vihaton/spring-example)
