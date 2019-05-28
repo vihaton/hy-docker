@@ -131,5 +131,60 @@ vili@T490:~/projects/hy-docker/part1/docker-clock$ docker run docker-clock
 ## 1.7
 
 ```
+vili@T490:~/projects/hy-docker/part1/docker-curler$ docker build -t curler .
+Sending build context to Docker daemon  3.072kB
+Step 1/4 : FROM ubuntu:xenial
+ ---> 2a697363a870
+Step 2/4 : RUN apt-get update && apt-get install -y curl
+ ---> Using cache
+ ---> b9e5192302ac
+Step 3/4 : COPY curler.sh .
+ ---> 2b657f8a457c
+Step 4/4 : CMD ["./curler.sh"]
+ ---> Running in b7395e224602
+Removing intermediate container b7395e224602
+ ---> f12ddde6286f
+Successfully built f12ddde6286f
+Successfully tagged curler:latest
+vili@T490:~/projects/hy-docker/part1/docker-curler$ docker run -it curler
+Input website:
+helsinki.fi
+Searching..
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>301 Moved Permanently</title>
+</head><body>
+<h1>Moved Permanently</h1>
+<p>The document has moved <a href="http://www.helsinki.fi/">here</a>.</p>
+</body></html>
+vili@T490:~/projects/hy-docker/part1/docker-curler$ 
 
 ```
+
+[Dockerfile](./docker-curler/Dockerfile)
+
+## 1.8
+
+Create the logs.txt file to docker-test directory
+
+`vili@T490:~/projects/hy-docker/part1/docker-test$ touch logs.txt`
+
+run container with volume bind mount
+
+`vili@T490:~/projects/hy-docker/part1$ docker run -v $(pwd)/docker-test/logs.txt:/usr/app/logs.txt devopsdockeruh/first_volume_exercise`
+
+## 1.9
+
+```
+vili@T490:~/projects/hy-docker/part1/youtube-dl$ docker run -d -p 4321:80 devopsdockeruh/ports_exercise
+13cfabe1c116ac8ebd92a20451d53ffeff1ca13e6ea936d328cd91693e09f8aa
+```
+
+## 1.10
+
+```
+EXPOSE 5000
+```
+
+## 1.11
+
